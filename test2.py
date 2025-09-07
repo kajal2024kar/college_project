@@ -46,18 +46,6 @@ def load_excel(path: str):
         return None
     return df
 
-def input_with_timeout(prompt, timeout=20):
-    answer = [None]
-    def ask():
-        answer[0] = input(prompt)
-    t = threading.Thread(target=ask)
-    t.daemon = True
-    t.start()
-    t.join(timeout)
-    if t.is_alive():
-        print("\n⏰ Time's up! No answer entered.")
-        return None
-    return answer[0]
 
 def main():
     print("Choose a quiz category:")
@@ -88,7 +76,7 @@ def main():
     for i in range(num_questions):
         row = get_question(df, i)
         print_question(row, i)
-        user_answer = input_with_timeout("Your answer (A/B/C/D or Q to quit): ", 5)
+        user_answer = input("enter ")
         if user_answer is None:
             print("No answer provided in 20 seconds.")
             print("-" * 40)
